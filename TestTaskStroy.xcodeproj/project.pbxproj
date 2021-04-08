@@ -11,6 +11,7 @@
 		A5EB2C1A261ED36100856FCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB2C19261ED36100856FCA /* ContentView.swift */; };
 		A5EB2C1C261ED36300856FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EB2C1B261ED36300856FCA /* Assets.xcassets */; };
 		A5EB2C1F261ED36300856FCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EB2C1E261ED36300856FCA /* Preview Assets.xcassets */; };
+		A5EB2C2D261ED66200856FCA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB2C2C261ED66200856FCA /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		A5EB2C1B261ED36300856FCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5EB2C1E261ED36300856FCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5EB2C20261ED36300856FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5EB2C2C261ED66200856FCA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +54,10 @@
 		A5EB2C16261ED36100856FCA /* TestTaskStroy */ = {
 			isa = PBXGroup;
 			children = (
+				A5EB2C2A261ED4F100856FCA /* SupportingFiles */,
+				A5EB2C28261ED49D00856FCA /* Models */,
+				A5EB2C27261ED48D00856FCA /* Views */,
 				A5EB2C17261ED36100856FCA /* TestTaskStroyApp.swift */,
-				A5EB2C19261ED36100856FCA /* ContentView.swift */,
-				A5EB2C1B261ED36300856FCA /* Assets.xcassets */,
-				A5EB2C20261ED36300856FCA /* Info.plist */,
 				A5EB2C1D261ED36300856FCA /* Preview Content */,
 			);
 			path = TestTaskStroy;
@@ -67,6 +69,31 @@
 				A5EB2C1E261ED36300856FCA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A5EB2C27261ED48D00856FCA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5EB2C19261ED36100856FCA /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A5EB2C28261ED49D00856FCA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5EB2C2C261ED66200856FCA /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A5EB2C2A261ED4F100856FCA /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A5EB2C1B261ED36300856FCA /* Assets.xcassets */,
+				A5EB2C20261ED36300856FCA /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +167,7 @@
 			files = (
 				A5EB2C1A261ED36100856FCA /* ContentView.swift in Sources */,
 				A5EB2C18261ED36100856FCA /* TestTaskStroyApp.swift in Sources */,
+				A5EB2C2D261ED66200856FCA /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +299,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TestTaskStroy/Preview Content\"";
 				DEVELOPMENT_TEAM = RNER64Q73Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TestTaskStroy/Info.plist;
+				INFOPLIST_FILE = TestTaskStroy/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,7 +321,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TestTaskStroy/Preview Content\"";
 				DEVELOPMENT_TEAM = RNER64Q73Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TestTaskStroy/Info.plist;
+				INFOPLIST_FILE = TestTaskStroy/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
