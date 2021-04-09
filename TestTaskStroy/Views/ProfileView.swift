@@ -40,6 +40,10 @@ struct ProfileView: View {
                 
                 Divider()
                 
+                Frends(frends: frends)
+                
+                Divider()
+                
             }
             .padding()
         }
@@ -257,17 +261,60 @@ struct UserInformation: View {
 }
 
 struct Frends: View {
+    @Environment(\.colorScheme) private var colorScheme
     let frends: [User]
+    
     var body: some View {
-        Text("")
+        VStack {
+            HStack {
+                Text("ДРУЗЬЯ")
+                    .bold()
+                    .foregroundColor(colorScheme == .light ? .black : .vkWhite)
+                Text(String(frends.count))
+                    .foregroundColor(colorScheme == .light ? .vkLightGray2 : .vkDarkGray2)
+                Spacer()
+            }
+            .font(.system(size: 12))
+            
+        ScrollView(.horizontal, showsIndicators: false) {
+                
+                LazyHStack {
+                    ForEach(frends, id: \.self) { frend in
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                            
+                            VStack {
+                                if let image = frend.image {
+                                    Image(image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                    
+                                } else {
+                                    Image(systemName: "person")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                }
+                                Group {
+                                    Text(frend.firstName)
+                                    Text(frend.lastName)
+                                }
+                                .lineLimit(1)
+                                .font(.system(size: 12))
+                                
+                            }
+                            .foregroundColor(colorScheme == .light ? .black : .vkWhite)
+                            .frame(width: 70, height: 100)
+                        }
+                    } .offset(x: 16, y: 0)
+                }
+            }
+        .padding(.horizontal, -16)
+        }
+        
     }
 }
 
-struct Frends_Previews: PreviewProvider {
-    static var previews: some View {
-        Frends(frends: User.generateFrends())
-    }
-}
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
@@ -278,36 +325,43 @@ struct ProfileView_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
     }
 }
-//
-//struct HeaderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HeaderView(
-//            imageName: "sp-studio",
-//            fullName: "name",
-//            status: "online",
-//            deviceImage: "iphone",
-//            actionAboutMe: { print("Press About Me Button")}
-//        )
-//        .frame(height: 84)
-//    }
-//}
-//
-//struct HeaderButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HeaderButton(action: {}, image: "square.and.pencil", title: "Запись")
-//    }
-//}
-//
-//
-//struct HeaderButtons_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HeaderButtons()
-//    }
-//}
 
-//struct UserInformation_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserInformation(user: User.generateMeNil(), numberOfFriends: 2)
-//    }
-//}
+struct Frends_Previews: PreviewProvider {
+    static var previews: some View {
+        Frends(frends: User.generateFrends())
+    }
+}
+
+
+struct HeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderView(
+            imageName: "sp-studio",
+            fullName: "name",
+            status: "online",
+            deviceImage: "iphone",
+            actionAboutMe: { print("Press About Me Button")}
+        )
+        .frame(height: 84)
+    }
+}
+
+struct HeaderButton_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderButton(action: {}, image: "square.and.pencil", title: "Запись")
+    }
+}
+
+
+struct HeaderButtons_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderButtons()
+    }
+}
+
+struct UserInformation_Previews: PreviewProvider {
+    static var previews: some View {
+        UserInformation(user: User.generateMeNil(), numberOfFriends: 2)
+    }
+}
 
