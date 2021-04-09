@@ -17,6 +17,10 @@ struct User {
     var numberOfFollowers = 0
     var education: String?
     var work: String?
+    var status: String?
+    var device: String?
+    
+    var fullName: String { "\(firstName) \(lastName)" }
 }
 
 extension User {
@@ -29,7 +33,18 @@ extension User {
             image: "sp-studio",
             city: "Оренбург",
             education: "ОФ РЭУ им. Г.В. Плеханова",
-            work: "ООО Секретория"
+            work: "ООО Секретория",
+            status: "оnline",
+            device: "iphone"
+        )
+    }
+    
+    static func generateMeNil() -> User {
+        User(
+            nickName: "ageres7",
+            firstName: "Сергей",
+            lastName: "Долгих",
+            image: "sp-studio"
         )
     }
     
