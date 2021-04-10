@@ -20,6 +20,17 @@ struct ContentView: View {
                 Label("Профиль", systemImage: "person.circle")
                 
             }
+            
+            RandomGifView()
+                .tabItem {
+                    Label("Случайная Gif", systemImage: "cube")
+                }
+            
+            SearchGifView()
+                .tabItem {
+                    Label("Поиск", systemImage: "magnifyingglass.circle")
+                }
+            
         }
     }
 }
