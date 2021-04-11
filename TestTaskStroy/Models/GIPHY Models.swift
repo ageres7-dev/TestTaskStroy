@@ -8,8 +8,6 @@
 import Foundation
 
 
-// MARK: - Users
-
 struct RandomResponce: Codable {
     let data: GIFObject?
 }
@@ -24,14 +22,7 @@ struct PaginationObject: Codable {
     let offset: Int?
     let totalCount: Int?
     let count: Int?
-    
-//    enum CodingKeys: String, CodingKey {
-//        case offset = "offset"
-//        case totalCount = "total_count"
-//        case count = "count"
-//    }
 }
-
 
 
 struct GIFObject: Codable, Hashable {
@@ -41,16 +32,12 @@ struct GIFObject: Codable, Hashable {
 }
 
 struct Images: Codable, Hashable {
-    let fixedHeight: FixedHeight?
-    
-//    enum CodingKeys: String, CodingKey {
-//        case fixedHeight = "fixed_height"
-//    }
+    let fixedHeight: GIFUrl?
+    let fixedHeightDownsampled: GIFUrl?
 }
 
 
-
-struct FixedHeight: Codable, Hashable {
+struct GIFUrl: Codable, Hashable {
     let url: String?
 }
 

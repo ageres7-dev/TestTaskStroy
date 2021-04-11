@@ -32,13 +32,13 @@ class NetworkManager {
     }
     
     
-    func searchGIF(from string: String, offset: Int, complition: @escaping ([GIFObject]) -> ()) {
+    func searchGIF(from string: String, offset: Int, complition: @escaping (SearchResponce?) -> ()) {
         let url = buildUrl(searchTerm: string, offset: offset)
         
         fetchObject(SearchResponce.self, from: url ) { response in
-            guard let GIFGIFObjects = response.data else { return }
+//            guard let GIFGIFObjects = response.data else { return }
             
-            complition(GIFGIFObjects)
+            complition(response)
         }
     }
     

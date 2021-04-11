@@ -12,17 +12,20 @@ struct SearchGifView: View {
     @Binding var selectedGIF: GIFObject?
     @State private var searchText = ""
     @State private var GIFs: [GIFObject] = []
+    @State private var pagination: PaginationObject?
+    @State private var offset = 1
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                SearchView(text: $searchText)
+                SearchBar(text: $searchText)
                     .onChange(of: searchText) { text in
                         if searchText == "" {
                             GIFs = []
                         }
-                        NetworkManager.shared.searchGIF(from: text, offset: 0) { GIFs in
-                            self.GIFs = GIFs
+                        NetworkManager.shared.searchGIF(from: text, offset: offset) { searchResponce in
+                            GIFs = searchResponce?.data ?? []
+                            pagination = searchResponce?.pagination
                         }
                     }
                 
@@ -36,9 +39,10 @@ struct SearchGifView: View {
             
             ScrollView {
                 LazyVStack {
-                    ForEach(GIFs, id: \.self) { GIF in
+                    ForEach(GIFs.indices, id: \.self) { indexGIF in
+                        let GIF = GIFs[indexGIF]
                         
-                        let url = URL(string: GIF.images?.fixedHeight?.url ?? "")
+                        let url = URL(string: GIF.images?.fixedHeightDownsampled?.url ?? "")
                         Button {
                             selectedGIF = GIF
                             presentationMode.wrappedValue.dismiss()
@@ -50,12 +54,16 @@ struct SearchGifView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .padding()
                         }
+                        .onAppear {
+                            if indexGIF == GIFs.count - 2 {
+                                actionLoadPage()
+                            }
+                        }
                     }
                 }
                 .padding(0)
             }
             .padding(0)
-            
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -63,50 +71,29 @@ struct SearchGifView: View {
     }
 }
 
-struct SearchView: View {
-    @Binding var text: String
-    @State private var isSearching = false
+
+extension SearchGifView {
     
+    private var isLoadNextPage: Bool {
+        guard let totalCount = pagination?.totalCount,
+              let count = pagination?.count,
+              let currentOffset = pagination?.offset else { return false }
+        
+        return (count * currentOffset) < totalCount
+    }
     
-    var body: some View {
-        HStack {
-            HStack {
-                TextField("Search GIF", text: $text)
-                    .padding(.horizontal, 24)
-            }
-            .padding()
-            .background(Color(.systemGray5))
-            .cornerRadius(16)
-            .onTapGesture {
-                isSearching = true
-            }
-            .overlay(
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .padding(.horizontal)
-                    Spacer()
-                    
-                    if isSearching && !text.isEmpty {
-                        Button(action: { text = "" }){
-                            Image(systemName: "xmark.circle")
-                                .padding()
-                        }
-                        .animation(.spring())
-                    }
-                }
-                .foregroundColor(.gray)
-            )
+    private func actionLoadPage() {
+        guard isLoadNextPage else { return }
+        offset += 1
+        NetworkManager.shared.searchGIF(from: searchText, offset: offset) { searchResponce in
+            let newElemets = searchResponce?.data ?? []
+            GIFs.append(contentsOf: newElemets)
+            
+            pagination = searchResponce?.pagination
         }
     }
 }
 
-
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchView(searchText: .constant(""))
-//            .preferredColorScheme(.dark)
-//    }
-//}
 
 struct SearchGifView_Previews: PreviewProvider {
     static var previews: some View {
