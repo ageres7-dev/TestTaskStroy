@@ -7,17 +7,13 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+
 struct SearchGifView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedGIF: GIFObject?
     @State private var searchText = ""
     @State private var GIFs: [GIFObject] = []
     @State private var pagination: PaginationObject?
-    @State private var offset = 1
-    
-    let columns = [
-            GridItem(.adaptive(minimum: 150))
-        ]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -84,6 +80,14 @@ struct SearchGifView: View {
 
 extension SearchGifView {
     
+    private var offset: Int {
+        pagination?.offset ?? 1
+    }
+    
+    private var columns: [GridItem] {
+        [ GridItem(.adaptive(minimum: 150)) ]
+    }
+    
     private var isLoadNextPage: Bool {
         guard let totalCount = pagination?.totalCount,
               let count = pagination?.count,
@@ -94,8 +98,8 @@ extension SearchGifView {
     
     private func actionLoadPage() {
         guard isLoadNextPage else { return }
-        offset += 1
-        NetworkManager.shared.searchGIF(from: searchText, offset: offset) { searchResponce in
+        
+        NetworkManager.shared.searchGIF(from: searchText, offset: offset + 1) { searchResponce in
             let newElemets = searchResponce?.data ?? []
             GIFs.append(contentsOf: newElemets)
             
