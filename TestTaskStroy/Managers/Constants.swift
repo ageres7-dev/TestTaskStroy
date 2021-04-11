@@ -12,4 +12,5 @@ enum Constant: String {
     
     case urlRandomGig = "https://api.giphy.com/v1/gifs/random?api_key=nTG1H99lnOAbTqJKXynVxAqufbiFOdH5&tag=&rating=r"
     
+    case urlSearch = "https://api.giphy.com/v1/gifs/search"
 }

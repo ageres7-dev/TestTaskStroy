@@ -21,10 +21,9 @@ class URLS {
             URLQueryItem(name: "offset", value: offset),
             URLQueryItem(name: "rating", value: "g"),
             URLQueryItem(name: "lang", value: "en")
-//            rating=g&lang=en
-            
         ]
-        var components = URLComponents(string: "https://api.giphy.com/v1/gifs/search")
+        
+        var components = URLComponents(string: Constant.urlSearch.rawValue)
         components?.queryItems = queryItems
         
         return components?.url

@@ -10,12 +10,12 @@ import Foundation
 
 // MARK: - Users
 
-struct RandomEndpoint: Codable {
+struct RandomResponce: Codable {
     let data: GIFObject?
 }
 
 
-struct SearchEndpoint: Codable {
+struct SearchResponce: Codable {
     let data: [GIFObject]?
     let pagination: PaginationObject?
 }

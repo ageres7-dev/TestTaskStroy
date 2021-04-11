@@ -43,9 +43,9 @@ struct RandomGifView: View {
 
 extension RandomGifView {
     private func fethRandomGif() {
-        NetworkManager.shared.fetchObject(RandomEndpoint.self,
-                                          from: Constant.urlRandomGig.rawValue) { randomEndpoint in
-            gifData = randomEndpoint.data
+        
+        NetworkManager.shared.randomGIF { GIFObject in
+            gifData = GIFObject
         }
     }
 }
