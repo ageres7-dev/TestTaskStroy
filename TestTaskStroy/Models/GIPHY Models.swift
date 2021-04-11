@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct RandomResponce: Codable {
+struct GIFResponce: Codable {
     let data: GIFObject?
 }
 
 
-struct SearchResponce: Codable {
+struct GIFsResponce: Codable {
     let data: [GIFObject]?
     let pagination: PaginationObject?
 }
@@ -34,6 +34,8 @@ struct GIFObject: Codable, Hashable {
 struct Images: Codable, Hashable {
     let fixedHeight: GIFUrl?
     let fixedHeightDownsampled: GIFUrl?
+    let fixedHeightSmall: GIFUrl?
+    let fixedHeightSmallStill: GIFUrl?
 }
 
 

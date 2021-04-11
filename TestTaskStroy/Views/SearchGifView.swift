@@ -15,6 +15,10 @@ struct SearchGifView: View {
     @State private var pagination: PaginationObject?
     @State private var offset = 1
     
+    let columns = [
+            GridItem(.adaptive(minimum: 150))
+        ]
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -38,7 +42,7 @@ struct SearchGifView: View {
             Divider()
             
             ScrollView {
-                LazyVStack {
+                LazyVGrid(columns: columns){
                     ForEach(GIFs.indices, id: \.self) { indexGIF in
                         let GIF = GIFs[indexGIF]
                         
@@ -52,6 +56,7 @@ struct SearchGifView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .frame(width: 150, height: 150)
                                 .padding()
                         }
                         .onAppear {
@@ -64,6 +69,11 @@ struct SearchGifView: View {
                 .padding(0)
             }
             .padding(0)
+        }
+        .onAppear{
+            NetworkManager.shared.trandingGIFs { response in
+                GIFs = response?.data ?? []
+            }
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

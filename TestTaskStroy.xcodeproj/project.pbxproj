@@ -22,7 +22,6 @@
 		A5EB2C36261F2A2000856FCA /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB2C35261F2A2000856FCA /* Color + Extension.swift */; };
 		A5EB2C3B2620461900856FCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB2C3A2620461900856FCA /* Constants.swift */; };
 		A5EB2C3F26204A3800856FCA /* GIPHY Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB2C3E26204A3800856FCA /* GIPHY Models.swift */; };
-		A5FEC8C6262258DB009E1B59 /* URLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FEC8C5262258DB009E1B59 /* URLS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +41,6 @@
 		A5EB2C35261F2A2000856FCA /* Color + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		A5EB2C3A2620461900856FCA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A5EB2C3E26204A3800856FCA /* GIPHY Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GIPHY Models.swift"; sourceTree = "<group>"; };
-		A5FEC8C5262258DB009E1B59 /* URLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				A5EB2C3A2620461900856FCA /* Constants.swift */,
-				A5FEC8C5262258DB009E1B59 /* URLS.swift */,
 				A5BD4E5C26222F180055AB52 /* NetworkManager.swift */,
 			);
 			path = Managers;
@@ -227,7 +224,6 @@
 				A5BD4E5D26222F180055AB52 /* NetworkManager.swift in Sources */,
 				A5EB2C18261ED36100856FCA /* TestTaskStroyApp.swift in Sources */,
 				A5EAB80E2621763500350B34 /* SearchGifView.swift in Sources */,
-				A5FEC8C6262258DB009E1B59 /* URLS.swift in Sources */,
 				A5EB2C2D261ED66200856FCA /* User.swift in Sources */,
 				A5EB2C3B2620461900856FCA /* Constants.swift in Sources */,
 				A5EB2C33261F262400856FCA /* CustomButton.swift in Sources */,

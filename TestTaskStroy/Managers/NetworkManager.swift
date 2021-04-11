@@ -12,32 +12,28 @@ class NetworkManager {
     
     private init() {}
     
-    /*
-    let url = "\(URLS.shared.buildUrl(forTerm: searchText, offset: "0")!)"
-    print(url)
-    NetworkManager.shared.fetchObject(SearchResponce.self, from: url ) { response in
-        GIFs = response.data
-        print(GIFs)
-    }
-    */
-    
     func randomGIF(complition: @escaping (GIFObject) -> ()) {
         let url = buildUrlRandomGIF()
         
-        fetchObject(RandomResponce.self, from: url ) { response in
+        fetchObject(GIFResponce.self, from: url ) { response in
             guard let GIFObject = response.data else { return }
             
             complition(GIFObject)
         }
     }
     
+    func trandingGIFs(complition: @escaping (GIFsResponce?) -> ()) {
+        let url = buildUrlTranding()
+        
+        fetchObject(GIFsResponce.self, from: url ) { response in
+            complition(response)
+        }
+    }
     
-    func searchGIF(from string: String, offset: Int, complition: @escaping (SearchResponce?) -> ()) {
+    func searchGIF(from string: String, offset: Int, complition: @escaping (GIFsResponce?) -> ()) {
         let url = buildUrl(searchTerm: string, offset: offset)
         
-        fetchObject(SearchResponce.self, from: url ) { response in
-//            guard let GIFGIFObjects = response.data else { return }
-            
+        fetchObject(GIFsResponce.self, from: url ) { response in
             complition(response)
         }
     }
@@ -97,34 +93,18 @@ class NetworkManager {
         
         return components?.url
     }
+    
+    private func buildUrlTranding() -> URL? {
+        let queryItems = [
+            URLQueryItem(name: "api_key", value: Constant.key.rawValue),
+            URLQueryItem(name: "limit", value: "8"),
+            URLQueryItem(name: "rating", value: "r")
+        ]
         
+        var components = URLComponents(string: Constant.urlTranding.rawValue)
+        components?.queryItems = queryItems
         
-    /*
-    func fetchObject<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (_ object: T)->()) {
-        
-        guard let url = URL(string: url) else { return }
-//        Result
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            guard let data = data else { return }
-            
-            do {
-                let decode = JSONDecoder()
-                decode.keyDecodingStrategy = .convertFromSnakeCase
-                let object = try decode.decode(T.self, from: data)
-                print(object)
-                DispatchQueue.main.async {
-                    completion(object)
-                }
-            } catch let error {
-                print("CurrentWeather Error serialization json", error.localizedDescription)
-            }
-        }.resume()
-        
-        */
-        
+        return components?.url
+    }
     
 }

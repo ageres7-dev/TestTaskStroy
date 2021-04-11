@@ -23,7 +23,7 @@ struct ContentView: View {
             
             RandomGifView()
                 .tabItem {
-                    Label("Случайная Gif", systemImage: "cube")
+                    Label("GIPHY API", systemImage: "photo.on.rectangle.angled")
                 }
         }
     }
