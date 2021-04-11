@@ -25,12 +25,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("Случайная Gif", systemImage: "cube")
                 }
-            
-            SearchGifView()
-                .tabItem {
-                    Label("Поиск", systemImage: "magnifyingglass.circle")
-                }
-            
         }
     }
 }

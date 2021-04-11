@@ -11,22 +11,25 @@ import SDWebImageSwiftUI
 struct RandomGifView: View {
     @State private var isFirsAppear = true
     @State private var gifData: GIFObject?
+    @State private var showingSearch = false
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                LazyVStack {
                     
                     AnimatedImage(url: URL(string: gifData?.images?.fixedHeight?.url ?? ""))
                         .indicator(SDWebImageActivityIndicator.medium)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 300, height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .padding()
                     
                     Button(action: fethRandomGif) {
                         Text("Load random GIF")
+                            .setCustomStyleButton()
                     }
+                    .padding()
                 }
             }
             .onAppear() {
@@ -36,7 +39,17 @@ struct RandomGifView: View {
                 }
             }
             .navigationTitle(gifData?.title ?? "Random GIF")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingSearch.toggle() }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingSearch) {
+                SearchGifView(selectedGIF: $gifData)
+            }
         }
     }
 }
