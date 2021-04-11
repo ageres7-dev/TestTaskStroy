@@ -12,6 +12,7 @@ class NetworkManager {
     private init() {}
     
     func fetchObject<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (_ object: T)->()) {
+        
         guard let url = URL(string: url) else { return }
 //        Result
         URLSession.shared.dataTask(with: url) { (data, _, error) in

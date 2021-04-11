@@ -34,12 +34,13 @@ struct PaginationObject: Codable {
 
 
 
-struct GIFObject: Codable {
+struct GIFObject: Codable, Hashable {
+    
     let images: Images?
     let title: String?
 }
 
-struct Images: Codable {
+struct Images: Codable, Hashable {
     let fixedHeight: FixedHeight?
     
 //    enum CodingKeys: String, CodingKey {
@@ -49,7 +50,7 @@ struct Images: Codable {
 
 
 
-struct FixedHeight: Codable {
+struct FixedHeight: Codable, Hashable {
     let url: String?
 }
 

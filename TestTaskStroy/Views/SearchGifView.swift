@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 struct SearchGifView: View {
     @State private var selectedGIF: GIFObject?
     @State private var searchText = ""
@@ -14,18 +14,55 @@ struct SearchGifView: View {
     
     
     var body: some View {
-        NavigationView {
             VStack {
                 HStack {
                     SearchView(text: $searchText)
+                    /*
+                    Button("Search") {
+                        let url = "\(URLS.shared.buildUrl(forTerm: searchText, offset: "0")!)"
+                        print(url)
+                        NetworkManager.shared.fetchObject(SearchEndpoint.self, from: url ) { response in
+                            GIFs = response.data
+                            print(GIFs)
+                        }
+                    }
+                    */
+                        .onChange(of: searchText) { text in
+                            let url = "\(URLS.shared.buildUrl(forTerm: searchText, offset: "0")!)"
+                            print(url)
+                            NetworkManager.shared.fetchObject(SearchEndpoint.self, from: url ) { response in
+                                GIFs = response.data
+                                print(GIFs)
+                            }
+                        }
+                    
                     
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/){
                         Text("Cancel")
                     }
-//                    .padding(.leading)
+                    //                    .padding(.leading)
                 }
                 .padding()
-            }
+                
+                ScrollView {
+                    LazyVStack {
+                        ForEach(GIFs ?? [], id: \.self) { GIF in
+                            Text(""
+                            )
+                            let url = URL(string: GIF.images?.fixedHeight?.url ?? "")
+                            AnimatedImage(url: url)
+                                .indicator(SDWebImageActivityIndicator.medium)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 200, height: 200)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                        }
+                        
+                    }
+                }
+                
+                
+            
         }
     }
 
@@ -54,14 +91,16 @@ struct SearchView: View {
                     
                     if isSearching {
                         Button(action: { text = "" }){
+                            
                             Image(systemName: "xmark.circle")
-//                                .padding()
+                                .padding()
+//                                .frame(width: 36, height: 34)
                         }
                         .animation(.spring())
                     }
                 }
                 .foregroundColor(.gray)
-                .padding(.horizontal)
+                .padding(.leading)
             )
         }
     }
